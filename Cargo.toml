@@ -1,0 +1,26 @@
+[package]
+name = "file-explorer"
+version = "0.1.0"
+authors = ["Coolsonickirby <alihussain2001@gmail.com>"]
+edition = "2018"
+
+[package.metadata.skyline]
+titleid = "01006A800016E000"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+skyline = { git = "https://github.com/ultimate-research/skyline-rs.git" }
+skyline_smash = { git = "https://github.com/ultimate-research/skyline-smash.git" }
+skyline-web = { git = "https://github.com/skyline-rs/skyline-web" }
+tinytemplate = "1.1.0"
+serde = { version = "1.0", features = ["derive"] }
+percent-encoding = "2.1.0"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+lto = true

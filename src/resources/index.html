@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
+    <title>File Explorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="current_dir">
+        <h2>Current Directory: {current_dir}</h2>
+    </div>
+    <div class="seperator">
+        <div></div>
+    </div>
+    <div class="flex-container">
+        {{ if not is_root }}
+            <button onclick="location.href='http://localhost/go_up'" class="flex-item">
+                <img src="folder.png">
+                <h2>..</h2>
+            </button>
+        {{ endif }}
+        {{ for listing in listings }}
+            <button onclick="location.href='http://localhost/{listing.name}'" class="flex-item">
+                <img src="{listing.icon}">
+                <h2>{listing.name}</h2>
+            </button>
+        {{ endfor }}
+    </div>
+</body>
+</html>
