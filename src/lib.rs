@@ -47,7 +47,7 @@ pub fn get_directory_results(location: &str) -> Vec<FileType>{
         directory_listing.push(new_path_struct);
     }
 
-    // Sort it alphabatically
+    // Sort it alphabetically
     directory_listing.sort_by(|a, b| a.name.to_ascii_lowercase().cmp(&b.name.to_ascii_lowercase()));
 
     // Sort it by bool
@@ -113,7 +113,12 @@ pub fn show_explorer(mut path: String) -> String{
         
         if response_path != ""{
             path = format!("{}", response_path);
-            if !PathBuf::from(&path).is_dir(){
+            if PathBuf::from(&path).is_dir(){
+                if path.chars().last().unwrap() != '/'{
+                    // Add slash if path is directory without / at the end
+                    path = format!("{}/", path);
+                }
+            }else{
                 // If file is selected, then return file path
                 return path.to_string();
             }
