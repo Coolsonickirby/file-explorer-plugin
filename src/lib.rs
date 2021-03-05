@@ -131,6 +131,7 @@ pub fn show_explorer(mut path: String) -> String{
 
 #[skyline::main(name = "file-explorer")]
 pub fn main() {
+    
     let starting_path;
 
     if STARTING_FOLDER.chars().last().unwrap() != '/'{
@@ -142,4 +143,5 @@ pub fn main() {
     let selected_file = show_explorer(starting_path);
 
     println!("Selected File Path: {}", selected_file);
+
 }
