@@ -36,7 +36,7 @@ pub fn get_directory_results(location: &str) -> Vec<FileType>{
 
     for path in paths {
         let name = format!("{}", path.unwrap().path().display());
-        let path_string = format!("{}/{}", location, name);
+        let path_string = format!("{}", name);
         let is_directory = PathBuf::from(&path_string).is_dir();
         let new_path_struct = FileType{
             name: String::from(name),
@@ -66,11 +66,11 @@ fn go_up(path: String) -> String{
     let split = path.split("/");
     let mut result: Vec<&str> = split.collect();
     let amount_to_remove: usize = if path.chars().last().unwrap() == '/' {2} else {1};
-    
+
     result.truncate(result.len() - amount_to_remove);
-    
+
     result.push("");
-    
+
     result.join("/")
 }
 
@@ -90,9 +90,9 @@ fn show_menu(context: Context) -> String {
         "" => "".to_string(),
         url => {
             if context.current_dir.chars().last().unwrap() == '/'{
-                format!("{}{}", context.current_dir, percent_decode_str(&url[LOCALHOST.len()..]).decode_utf8_lossy().into_owned().to_string())
+                format!("{}", percent_decode_str(&url[LOCALHOST.len()..]).decode_utf8_lossy().into_owned().to_string())
             }else{
-                format!("{}/{}", context.current_dir, percent_decode_str(&url[LOCALHOST.len()..]).decode_utf8_lossy().into_owned().to_string())
+                format!("{}", percent_decode_str(&url[LOCALHOST.len()..]).decode_utf8_lossy().into_owned().to_string())
             }
         }
     }
@@ -101,7 +101,7 @@ fn show_menu(context: Context) -> String {
 pub fn show_explorer(mut path: String) -> String{
     loop {
         let results: Vec<FileType> = get_directory_results(&path);
-        
+
         let context = Context{
             current_dir: path.to_string(),
             is_root: path.matches("/").count() == 1,
@@ -131,7 +131,7 @@ pub fn show_explorer(mut path: String) -> String{
 
 #[skyline::main(name = "file-explorer")]
 pub fn main() {
-    
+
     let starting_path;
 
     if STARTING_FOLDER.chars().last().unwrap() != '/'{
